@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ms" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="E-Menu Rasa Rasa - Nikmati hidangan lazat terus ke meja anda. Pesan secara terus menerusi WhatsApp dengan mudah dan cepat.">
+    <title>E-Menu Rasa Rasa | Restoran Pintar Kami</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Premium Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Premium Sticky Header -->
+    <header class="app-header">
+        <div class="header-container">
+            <a href="#" class="brand-logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-utensils"></i>
+                </div>
+                <span class="brand-name">Rasa Rasa</span>
+            </a>
+            
+            <div class="header-actions">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle-btn" class="action-btn theme-btn" aria-label="Tukar Tema">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                
+                <!-- Cart Toggle Button -->
+                <button id="cart-toggle-btn" class="action-btn cart-btn" aria-label="Troli Belanja">
+                    <i class="fa-solid fa-basket-shopping"></i>
+                    <span class="btn-text">Troli</span>
+                    <span id="cart-count" class="cart-badge hidden">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-tag">Nikmati Kepelbagaian Rasa</span>
+            <h2 class="hero-title">Selamat Datang Ke Rasa Rasa</h2>
+            <p class="hero-subtitle">Pesan hidangan kegemaran anda secara terus ke meja anda menerusi WhatsApp.</p>
+            
+            <!-- Search Container -->
+            <div class="search-container">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="search-input" placeholder="Cari makanan, minuman atau pencuci mulut..." aria-label="Cari hidangan">
+                <button id="search-clear-btn" class="search-clear-btn hidden" aria-label="Padam carian">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <!-- Popular Search Tags -->
+            <div class="trending-tags">
+                <span class="tag-label">Carian Popular:</span>
+                <div class="tags-group">
+                    <button class="trend-tag">Nasi Lemak</button>
+                    <button class="trend-tag">Satay</button>
+                    <button class="trend-tag">Teh Tarik</button>
+                    <button class="trend-tag">Pencuci Mulut</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="categories-container">
+            <div class="scroll-fade fade-left"></div>
+            <div id="category-container" class="category-scroll">
+                <button id="btn-all" class="category-card active">
+                    <i class="fa-solid fa-border-all"></i>
+                    <span>Semua Menu</span>
+                </button>
+                <!-- Categories will be rendered dynamically -->
+            </div>
+            <div class="scroll-fade fade-right"></div>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        
+        <!-- Premium skeleton loading state -->
+        <div id="loading" class="loading-container">
+            <div class="skeleton-grid">
+                <!-- Skeleton Item 1 -->
+                <div class="skeleton-card">
+                    <div class="skeleton-image pulse"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-title pulse"></div>
+                        <div class="skeleton-text pulse"></div>
+                        <div class="skeleton-footer">
+                            <div class="skeleton-price pulse"></div>
+                            <div class="skeleton-button pulse"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Skeleton Item 2 -->
+                <div class="skeleton-card">
+                    <div class="skeleton-image pulse"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-title pulse"></div>
+                        <div class="skeleton-text pulse"></div>
+                        <div class="skeleton-footer">
+                            <div class="skeleton-price pulse"></div>
+                            <div class="skeleton-button pulse"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Skeleton Item 3 -->
+                <div class="skeleton-card">
+                    <div class="skeleton-image pulse"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-title pulse"></div>
+                        <div class="skeleton-text pulse"></div>
+                        <div class="skeleton-footer">
+                            <div class="skeleton-price pulse"></div>
+                            <div class="skeleton-button pulse"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Skeleton Item 4 -->
+                <div class="skeleton-card">
+                    <div class="skeleton-image pulse"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-title pulse"></div>
+                        <div class="skeleton-text pulse"></div>
+                        <div class="skeleton-footer">
+                            <div class="skeleton-price pulse"></div>
+                            <div class="skeleton-button pulse"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="loading-message">Menyediakan hidangan terbaik untuk anda...</p>
+        </div>
+
+        <!-- Premium Error State -->
+        <div id="error" class="error-container hidden">
+            <div class="error-icon-box">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h3>Gagal Memuatkan Menu</h3>
+            <p class="error-desc">Terdapat masalah sambungan dengan pangkalan data kami. Jangan risau, anda masih boleh meninjau menu contoh kami.</p>
+            <div class="error-actions">
+                <button id="retry-btn" class="primary-btn"><i class="fa-solid fa-rotate-right"></i> Cuba Semula</button>
+                <button id="fallback-btn" class="secondary-btn"><i class="fa-solid fa-images"></i> Guna Menu Contoh</button>
+            </div>
+        </div>
+
+        <!-- Menu Grid -->
+        <div id="menu-grid" class="menu-grid hidden">
+            <!-- Dynamic food cards will be rendered here -->
+        </div>
+
+        <!-- No Results State -->
+        <div id="no-results" class="no-results-container hidden">
+            <div class="no-results-icon">
+                <i class="fa-solid fa-cookie-bite"></i>
+            </div>
+            <h3>Tiada Hasil Dijumpai</h3>
+            <p>Hidangan yang anda cari tiada dalam senarai atau kategori ini. Cuba kata kunci yang lain.</p>
+            <button id="clear-search-btn" class="primary-btn">Lihat Semua Menu</button>
+        </div>
+    </main>
+
+    <!-- Shopping Cart Drawer Overlay and Container -->
+    <div id="cart-backdrop" class="drawer-backdrop hidden"></div>
+    
+    <div id="cart-drawer" class="cart-drawer closed">
+        <div class="drawer-header">
+            <div class="drawer-title">
+                <i class="fa-solid fa-basket-shopping text-primary"></i>
+                <h3>Troli Anda</h3>
+                <span id="cart-drawer-count" class="item-count-badge">0 item</span>
+            </div>
+            <button id="close-cart-btn" class="close-drawer-btn" aria-label="Tutup Troli">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        
+        <!-- Cart Items List Container -->
+        <div id="cart-items" class="drawer-body">
+            <!-- Items rendered dynamically -->
+        </div>
+
+        <!-- Drawer Footer (Checkout form) -->
+        <div class="drawer-footer">
+            <div class="summary-details">
+                <div class="summary-row">
+                    <span>Jumlah Item:</span>
+                    <span id="summary-total-qty">0</span>
+                </div>
+                <div class="summary-row total-row">
+                    <span>Jumlah Keseluruhan:</span>
+                    <span id="cart-total" class="total-price">RM 0.00</span>
+                </div>
+            </div>
+            
+            <div class="checkout-form">
+                <div class="form-group">
+                    <label for="table-number" class="form-label">
+                        <i class="fa-solid fa-map-location-dot"></i> Nombor Meja / No. Telefon (Penghantaran)
+                    </label>
+                    <input type="text" id="table-number" placeholder="Contoh: Meja 12 atau 60123456789" required>
+                    <small class="form-help">Sila masukkan nombor meja anda di restoran, atau nombor telefon jika memesan dari luar.</small>
+                </div>
+                
+                <button id="checkout-btn" class="checkout-submit-btn">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>Hantar Pesanan ke WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal Backdrop & Container -->
+    <div id="modal-backdrop" class="modal-backdrop hidden"></div>
+    
+    <div id="product-detail-modal" class="detail-modal hidden">
+        <button id="close-modal-btn" class="close-modal-btn" aria-label="Tutup Detail">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        
+        <div class="modal-content">
+            <div class="modal-image-container">
+                <img id="modal-product-img" src="" alt="" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80'">
+                <span id="modal-product-badge" class="product-badge"></span>
+            </div>
+            
+            <div class="modal-details">
+                <span id="modal-product-category" class="product-category"></span>
+                <h3 id="modal-product-title" class="product-title"></h3>
+                <p id="modal-product-desc" class="product-description"></p>
+                
+                <!-- Additional Premium Options -->
+                <div class="modal-options">
+                    <div class="option-section">
+                        <h4 class="option-title">Pilihan Kepedasan / Kemasan</h4>
+                        <div class="option-chips">
+                            <label class="chip-label">
+                                <input type="radio" name="preference" value="Biasa" checked>
+                                <span>Biasa</span>
+                            </label>
+                            <label class="chip-label">
+                                <input type="radio" name="preference" value="Kurang Pedas/Manis">
+                                <span>Kurang Pedas/Manis</span>
+                            </label>
+                            <label class="chip-label">
+                                <input type="radio" name="preference" value="Lebih Pedas/Manis">
+                                <span>Lebih Pedas/Manis <i class="fa-solid fa-fire text-red-500"></i></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="option-section">
+                        <h4 class="option-title">Nota Tambahan</h4>
+                        <input type="text" id="modal-product-note" placeholder="Sebutir nota (cth: Tanpa ais, kuah lebih)..." class="option-note-input">
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <div class="price-container">
+                        <span class="price-label">Harga Seunit:</span>
+                        <span id="modal-product-price" class="product-price">RM 0.00</span>
+                    </div>
+                    
+                    <div class="modal-actions-bar">
+                        <div class="qty-stepper">
+                            <button id="modal-qty-minus" class="stepper-btn"><i class="fa-solid fa-minus"></i></button>
+                            <span id="modal-qty-val" class="stepper-value">1</span>
+                            <button id="modal-qty-plus" class="stepper-btn"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        
+                        <button id="modal-add-to-cart-btn" class="add-to-cart-btn">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                            <span>Tambah ke Troli</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast-notification" class="toast hidden">
+        <i id="toast-icon" class="fa-solid fa-circle-check"></i>
+        <span id="toast-message">Item ditambah ke troli!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="footer-container">
+            <p>&copy; 2026 E-Menu Rasa Rasa. Rekaan Elegan & Premium. Hak Cipta Terpelihara.</p>
+        </div>
+    </footer>
+
+    <!-- JS script deferred -->
+    <script src="app.js" defer></script>
+</body>
+</html>
