@@ -279,7 +279,26 @@ function parseCSV(text) {
     return result;
 }
 
-// 9. Fetch Menu from Sheets CSV directly
+// 9. Helper: Convert Google Drive share links to direct image URLs
+function convertToDirectImageUrl(url) {
+    if (!url) return '';
+    
+    // Match Google Drive share URL patterns:
+    // https://drive.google.com/file/d/FILE_ID/view?usp=sharing
+    // https://drive.google.com/open?id=FILE_ID
+    const fileIdMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) ||
+                        url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+    
+    if (fileIdMatch && fileIdMatch[1]) {
+        const fileId = fileIdMatch[1];
+        return `https://drive.google.com/uc?export=view&id=${fileId}`;
+    }
+    
+    // Not a Drive link — return as-is
+    return url;
+}
+
+// 10. Fetch Menu from Sheets CSV directly
 async function fetchMenuData() {
     showState('loading');
     try {
@@ -312,7 +331,7 @@ async function fetchMenuData() {
             
             // Standardize image
             const rawImg = gambarIdx !== -1 && row[gambarIdx] ? row[gambarIdx].trim() : '';
-            let imgUrl = rawImg;
+            let imgUrl = convertToDirectImageUrl(rawImg);
             if (!imgUrl || imgUrl.includes('instagram.com') || imgUrl.includes('facebook.com')) {
                 // If it's a social post link or empty, use our default food placeholder
                 imgUrl = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80';
